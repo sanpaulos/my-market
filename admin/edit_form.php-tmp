@@ -1,0 +1,50 @@
+
+Deprecated: The each() function is deprecated. This message will be suppressed on further calls in C:\Users\Pavel\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 54
+<html>
+<head>
+  <title>Update Product</title>
+</head>
+<body>
+<h5>Change</h5>
+
+<?php
+var_dump($_POST);
+$id   = +$_POST['id'];
+$name = "";
+$cost = "";
+$conn = mysqli_connect('localhost', 'root', '', 'my_market');
+if ($conn) {
+	$sql    = "Select id, name, cost from product WHERE id=$id";
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		$row  = mysqli_fetch_assoc($result);
+		$id   = $row['id'];
+		$name = $row['name'];
+		$cost = $row['cost'];
+
+	} else {
+		echo "0 results";
+	}
+	mysqli_close($conn);
+}
+?>
+
+<form method="POST" action="edit_product.php">
+	<p>
+		<label>Change product name:
+			<input type="text" name="name" value="<?php echo $name?>">
+		</label>
+	</p>
+	<p>
+		<label>Change product password:
+			<input type="text" name="cost" value="<?php echo $cost?>"><br>
+		</label>
+	</p>
+	<p><input type="hidden" name="id" value="<?php echo $id?>">
+		<input type="submit" name="send" value="Update">
+	</p>
+
+</form>
+</body>
+</html>

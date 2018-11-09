@@ -1,0 +1,69 @@
+
+Deprecated: The each() function is deprecated. This message will be suppressed on further calls in C:\Users\Pavel\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 54
+<!DOCTYPE html>
+<html>
+<head>
+	<title>USERS</title>
+<?php include ('bootstrap-admin.php');?>
+</head>
+	<body>
+
+     	<form method="POST" action="add_users.php">
+			<p>
+				<input type="text" name="name">
+			</p>
+     		<p>
+     			<input type="submit" name="add" value="Add">
+     		</p>
+     	</form>
+
+
+	<table style="border: 2px solid;">
+	 <thead>
+    	<tr>
+     		<td> ID </td>
+     		<td>Name </td>
+    	</tr>
+  	 </thead>
+	<tbody>
+		<tr>
+<?php
+include ('title.php');
+$conn = mysqli_connect('localhost', 'root', '', 'my_market');
+
+if ($conn) {
+	$sql = "SELECT * FROM user";
+
+	$result = mysqli_query($conn, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			echo "<tr><td>".$id = $row['id']."</td>".
+			"<td>".$name        = $row['name']."</td>
+						<td>
+						<form method='POST' action='update_users_form.php'>
+						<input type='hidden' name='id' value=".$row['id'].">
+									<input type='submit' name='send' value='Edit'>
+								</form>
+							</td><td>
+								<form method='POST' action='delete_users.php'><input type='hidden' name='id' value=".$row['id'].">
+									<input type='submit' name='send' value='Delete'>
+
+								</form>
+						</td>
+
+						</tr>";
+		}
+	} else {
+		echo "0 results";
+	}
+
+	mysqli_close($conn);
+}
+?>
+		</tr>
+	</tbody>
+</table>
+
+	</body>
+</html>

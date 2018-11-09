@@ -1,0 +1,11 @@
+
+Deprecated: The each() function is deprecated. This message will be suppressed on further calls in C:\Users\Pavel\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 54
+<?php
+include ('bootstrap-admin.php');
+session_start();
+echo "Hi ".$_SESSION['name'];
+echo "<a href ='logout.php'> Logout </a>";
+if (!isset($_SESSION['auth_id']) && !$_SESSION['auth_id'] > 0) {
+	header('Location: http://my-market.io/admin');
+}
+?>

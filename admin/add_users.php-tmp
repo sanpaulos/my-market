@@ -1,0 +1,19 @@
+
+Deprecated: The each() function is deprecated. This message will be suppressed on further calls in C:\Users\Pavel\AppData\Roaming\Sublime Text 3\Packages\PHPTools\php.tools\codeFormatter.php on line 54
+<?php
+include ('bootstrap-admin.php');
+
+if (array_key_exists("add", $_POST)) {
+	$name = $_POST["name"];
+
+	$conn = mysqli_connect('localhost', 'root', '', 'my_market');
+	if ($conn) {
+		$sql    = "Insert into user(name) values(\"".$name."\")";
+		$result = mysqli_query($conn, $sql);
+		if ($result) {
+			header('Location: http://my-market.io/admin/admin_users.php');
+		}
+	}
+}
+mysqli_close($conn);
+?>
